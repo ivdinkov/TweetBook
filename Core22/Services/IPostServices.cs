@@ -8,9 +8,10 @@ namespace Core22.Services
 {
     public interface IPostServices
     {
-        List<Post> GetPosts();
-        Post GetPostById(Guid postId);
-        bool UpdatePost(Post updatedPost);
-        bool DeletePost(Guid guid);
+        Task<bool> CreatePostAsync(Post post);
+        Task<List<Post>> GetPostsAsync();
+        Task<Post> GetPostByIdASync(Guid postId);
+        Task<bool> UpdatePostAsync(Post updatedPost);
+        Task<bool> DeletePostAsync(Guid guid);
     }
 }

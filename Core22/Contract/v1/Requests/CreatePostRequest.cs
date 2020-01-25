@@ -7,6 +7,6 @@ namespace Core22.Contract.v1.Requests
 {
     public class CreatePostRequest
     {
-        public Guid ID { get; set; }
+        public string Name { get; set; }
     }
 }

@@ -20,7 +20,7 @@ namespace Core22.Installers
                     configuration.GetConnectionString("DefaultConnection")));
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<DataContext>();
-            services.AddSingleton<IPostServices, PostService>();
+            services.AddScoped<IPostServices, PostService>();
 
         }
     }
