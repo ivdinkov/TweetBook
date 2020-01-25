@@ -22,6 +22,18 @@ namespace Core22.Services
             }
         }
 
+
+        public bool DeletePost(Guid id)
+        {
+            var post = GetPostById(id);
+            if (post == null)
+                return false;
+
+            _posts.Remove(post);
+
+            return true;
+        }
+
         public Post GetPostById(Guid postId)
         {
             return _posts.SingleOrDefault(x=>x.ID == postId);
@@ -30,6 +42,19 @@ namespace Core22.Services
         public List<Post> GetPosts()
         {
             return _posts;
+        }
+
+        public bool UpdatePost(Post postToUpdate)
+        {
+            var exist = GetPostById(postToUpdate.ID) != null;
+            if (!exist)
+                return false;
+
+            var index = _posts.FindIndex(x => x.ID == postToUpdate.ID);
+
+            _posts[index] = postToUpdate;
+
+            return true;
         }
     }
 }

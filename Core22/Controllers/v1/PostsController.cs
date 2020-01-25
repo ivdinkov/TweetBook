@@ -32,6 +32,22 @@ namespace Core22.Controllers
             return Ok(post);
         }
 
+        [HttpPut(APIRoutes.Posts.Update)]
+        public IActionResult Update([FromRoute]Guid postId, [FromBody] UpdatePostRequest request)
+        {
+            var post = new Post { 
+                ID = postId,
+                Name = request.Name
+            };
+
+            var updated = _postService.UpdatePost(post);
+
+            if (updated)
+                return Ok(post);
+
+            return NotFound();
+        }
+
         [HttpGet(APIRoutes.Posts.GetAll)]
         public IActionResult GetAll()
         {
@@ -59,6 +75,16 @@ namespace Core22.Controllers
             var response = new PostRespons { ID = post.ID};
 
             return Created(locationUrl,response);
+        }
+
+        [HttpDelete(APIRoutes.Posts.Delete)]
+        public IActionResult Delete([FromRoute]Guid postId)
+        {
+            var delete = _postService.DeletePost(postId);
+            if (delete)
+                return NoContent();
+            
+            return NotFound();                
         }
     }
 }
