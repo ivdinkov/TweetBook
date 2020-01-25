@@ -28,6 +28,10 @@ namespace Core22.Services
         public async Task<bool> DeletePostAsync(Guid id)
         {
             var post = await GetPostByIdASync(id);
+
+            if (post == null)
+                return false;
+
             _dataContext.Remove(post);
             var deleted = await _dataContext.SaveChangesAsync();
 
@@ -46,6 +50,11 @@ namespace Core22.Services
 
         public async Task<bool> UpdatePostAsync(Post postToUpdate)
         {
+            var post = await GetPostByIdASync(postToUpdate.ID);
+
+            if (post == null)
+                return false;
+
             _dataContext.Posts.Update(postToUpdate);
             var updated = await _dataContext.SaveChangesAsync();
 
