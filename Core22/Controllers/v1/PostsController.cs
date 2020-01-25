@@ -2,6 +2,7 @@
 using Core22.Contract.v1.Requests;
 using Core22.Contract.v1.Responses;
 using Core22.Domain;
+using Core22.Services;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -12,22 +13,29 @@ namespace Core22.Controllers
 {
     public class PostsController :Controller
     {
-        private List<Post> _posts;
-
-        public PostsController()
+        private readonly IPostServices _postService;
+        public PostsController(IPostServices postServices)
         {
-            _posts = new List<Post>();
-            for (int i = 0; i < 5; i++)
-            {
-                _posts.Add(new Post {ID = Guid.NewGuid().ToString() });
-            }
+            _postService = postServices;
         }
 
+        [HttpGet(APIRoutes.Posts.Get)]
+        public IActionResult Get([FromRoute]Guid postId)
+        {
+            var post = _postService.GetPostById(postId);
+
+            if (post == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(post);
+        }
 
         [HttpGet(APIRoutes.Posts.GetAll)]
         public IActionResult GetAll()
         {
-            return Ok(_posts);
+            return Ok(_postService.GetPosts());
         }
 
         [HttpPost(APIRoutes.Posts.Create)]
@@ -37,15 +45,15 @@ namespace Core22.Controllers
             var post = new Post { ID = postRequest.ID};
 
 
-            if (string.IsNullOrEmpty(post.ID))
+            if (post.ID != Guid.Empty)
             {
-                post.ID = Guid.NewGuid().ToString();
+                post.ID = Guid.NewGuid();
             }
 
-            _posts.Add(post);
+            _postService.GetPosts().Add(post);
 
             var baseUrl = $"{HttpContext.Request.Scheme}://{HttpContext.Request.Host.ToUriComponent()}";
-            var locationUrl = baseUrl + "/" + APIRoutes.Posts.Get.Replace("postId",post.ID);
+            var locationUrl = baseUrl + "/" + APIRoutes.Posts.Get.Replace("postId",post.ID.ToString());
 
 
             var response = new PostRespons { ID = post.ID};

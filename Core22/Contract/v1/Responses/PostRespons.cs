@@ -7,6 +7,6 @@ namespace Core22.Contract.v1.Responses
 {
     public class PostRespons
     {
-        public string ID { get; set; }
+        public Guid ID { get; set; }
     }
 }

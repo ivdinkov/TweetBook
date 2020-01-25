@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\CODEBASE\\Core2.2\\Core22\\Core22\\Core22.csproj": {}
+    "D:\\CODEBASE\\TweetBook\\Core22\\Core22.csproj": {}
   },
   "projects": {
-    "D:\\CODEBASE\\Core2.2\\Core22\\Core22\\Core22.csproj": {
+    "D:\\CODEBASE\\TweetBook\\Core22\\Core22.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\CODEBASE\\Core2.2\\Core22\\Core22\\Core22.csproj",
+        "projectUniqueName": "D:\\CODEBASE\\TweetBook\\Core22\\Core22.csproj",
         "projectName": "Core22",
-        "projectPath": "D:\\CODEBASE\\Core2.2\\Core22\\Core22\\Core22.csproj",
+        "projectPath": "D:\\CODEBASE\\TweetBook\\Core22\\Core22.csproj",
         "packagesPath": "C:\\Users\\ivdin\\.nuget\\packages\\",
-        "outputPath": "D:\\CODEBASE\\Core2.2\\Core22\\Core22\\obj\\",
+        "outputPath": "D:\\CODEBASE\\TweetBook\\Core22\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\ivdin\\AppData\\Roaming\\NuGet\\NuGet.Config",

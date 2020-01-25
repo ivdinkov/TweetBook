@@ -7,6 +7,7 @@ namespace Core22.Domain
 {
     public class Post
     {
-        public string ID { get; set; }
+        public Guid ID { get; set; }
+        public string Name { get; set; }
     }
 }
