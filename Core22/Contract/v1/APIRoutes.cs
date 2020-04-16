@@ -20,5 +20,11 @@ namespace Core22.Contract
             public const string Delete = "api/v1/posts/{postId}";
             public const string Create = "api/v1/posts";
         }
+
+        public static class Identity
+        {
+            public const string Login = "api/v1/identity/login";
+            public const string Register = "api/v1/identity/register";
+        }
     }
 }

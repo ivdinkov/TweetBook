@@ -103,3 +103,4 @@ D:\CODEBASE\TweetBook\Core22\bin\Debug\netcoreapp3.0\System.IdentityModel.Tokens
 D:\CODEBASE\TweetBook\Core22\obj\Debug\netcoreapp3.0\Core22.csproj.CoreCompileInputs.cache
 D:\CODEBASE\TweetBook\Core22\obj\Debug\netcoreapp3.0\Core22.MvcApplicationPartsAssemblyInfo.cs
 D:\CODEBASE\TweetBook\Core22\obj\Debug\netcoreapp3.0\Core22.MvcApplicationPartsAssemblyInfo.cache
+D:\CODEBASE\TweetBook\Core22\obj\Debug\netcoreapp3.0\Core22.csprojAssemblyReference.cache

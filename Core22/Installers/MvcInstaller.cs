@@ -1,4 +1,5 @@
 ﻿using Core22.Options;
+using Core22.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -17,7 +18,7 @@ namespace Core22.Installers
             var jwtSettings = new JwtSettings();
             configuration.Bind(nameof(jwtSettings), jwtSettings);
             services.AddSingleton(jwtSettings);
-
+            services.AddScoped<IIdentityService, IdentityService>();
             services.AddControllersWithViews();
             services.AddRazorPages();
 

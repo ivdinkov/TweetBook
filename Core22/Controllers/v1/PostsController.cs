@@ -3,6 +3,8 @@ using Core22.Contract.v1.Requests;
 using Core22.Contract.v1.Responses;
 using Core22.Domain;
 using Core22.Services;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -11,6 +13,7 @@ using System.Threading.Tasks;
 
 namespace Core22.Controllers
 {
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class PostsController :Controller
     {
         private readonly IPostServices _postService;
