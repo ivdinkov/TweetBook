@@ -13,5 +13,6 @@ namespace Core22.Services
         Task<Post> GetPostByIdASync(Guid postId);
         Task<bool> UpdatePostAsync(Post updatedPost);
         Task<bool> DeletePostAsync(Guid guid);
+        Task<bool> UserOwnsPostAsync(Guid postId, string getUserId);
     }
 }

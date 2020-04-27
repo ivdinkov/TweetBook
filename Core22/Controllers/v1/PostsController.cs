@@ -2,6 +2,7 @@
 using Core22.Contract.v1.Requests;
 using Core22.Contract.v1.Responses;
 using Core22.Domain;
+using Core22.Extensions;
 using Core22.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
@@ -38,10 +39,15 @@ namespace Core22.Controllers
         [HttpPut(APIRoutes.Posts.Update)]
         public async Task<IActionResult> Update([FromRoute]Guid postId, [FromBody] UpdatePostRequest request)
         {
-            var post = new Post { 
-                ID = postId,
-                Name = request.Name
-            };
+            var userOwnsPost = await _postService.UserOwnsPostAsync(postId,HttpContext.GetUserId());
+
+            if (!userOwnsPost)
+            {
+                return BadRequest(new { Error = "You dont own this post!" });
+            }
+
+            var post = await _postService.GetPostByIdASync(postId);
+            post.Name = request.Name;
 
             var updated = await _postService.UpdatePostAsync(post);
 
@@ -61,7 +67,10 @@ namespace Core22.Controllers
         public async Task<IActionResult> Create([FromBody] CreatePostRequest postRequest)
         {
 
-            var post = new Post { Name = postRequest.Name};
+            var post = new Post {
+                Name = postRequest.Name,
+                UserId = HttpContext.GetUserId()
+            };
 
             await _postService.CreatePostAsync(post);
 
@@ -76,6 +85,13 @@ namespace Core22.Controllers
         [HttpDelete(APIRoutes.Posts.Delete)]
         public async Task<IActionResult> Delete([FromRoute]Guid postId)
         {
+            var userOwnsPost = await _postService.UserOwnsPostAsync(postId, HttpContext.GetUserId());
+
+            if (!userOwnsPost)
+            {
+                return BadRequest(new { Error = "You dont own this post!" });
+            }
+
             var delete = await _postService.DeletePostAsync(postId);
             if (delete)
                 return NoContent();
