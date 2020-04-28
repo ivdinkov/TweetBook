@@ -1,8 +1,9 @@
-﻿namespace Core22.Contract.v1.Responses
+﻿namespace Core22.Contract.v1.Requests
 {
-    public class AuthSuccessResponse
+    public class RefreshTokenRequest
     {
         public string Token { get; set; }
         public string RefreshToken { get; set; }
+
     }
 }

@@ -3,8 +3,6 @@ using Core22.Contract.v1.Requests;
 using Core22.Contract.v1.Responses;
 using Core22.Services;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -25,9 +23,9 @@ namespace Core22.Controllers.v1
         {
             if (!ModelState.IsValid)
             {
-                return BadRequest( new AuthFailResponse
+                return BadRequest(new AuthFailResponse
                 {
-                    Errors = ModelState.Values.SelectMany(x=>x.Errors.Select(e=>e.ErrorMessage))
+                    Errors = ModelState.Values.SelectMany(x => x.Errors.Select(e => e.ErrorMessage))
                 });
             }
 
@@ -41,8 +39,10 @@ namespace Core22.Controllers.v1
                 });
             }
 
-            return Ok(new AuthSuccessResponse { 
-                Token = authResonse.Token
+            return Ok(new AuthSuccessResponse
+            {
+                Token = authResonse.Token,
+                RefreshToken = authResonse.RefreshToken
             });
         }
 
@@ -67,8 +67,30 @@ namespace Core22.Controllers.v1
                 });
             }
 
-            return Ok(new AuthSuccessResponse { 
-                Token = authResonse.Token
+            return Ok(new AuthSuccessResponse
+            {
+                Token = authResonse.Token,
+                RefreshToken = authResonse.RefreshToken
+            });
+        }
+
+        [HttpPost(APIRoutes.Identity.Refresh)]
+        public async Task<IActionResult> Refresh([FromBody]RefreshTokenRequest request)
+        {
+            var authResonse = await _identityService.RefreshTokenAsync(request.Token, request.RefreshToken);
+
+            if (!authResonse.Success)
+            {
+                return BadRequest(new AuthFailResponse
+                {
+                    Errors = authResonse.Errors
+                });
+            }
+
+            return Ok(new AuthSuccessResponse
+            {
+                Token = authResonse.Token,
+                RefreshToken = authResonse.RefreshToken
             });
         }
     }

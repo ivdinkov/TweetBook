@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Core22.Domain;
+﻿using Core22.Domain;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
@@ -15,5 +12,6 @@ namespace Core22.Data
         }
 
         public DbSet<Post> Posts { get; set; }
+        public DbSet<RefreshToken> RefreshTokens { get; set; }
     }
 }

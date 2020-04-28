@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace Core22.Domain
 {
@@ -10,5 +7,6 @@ namespace Core22.Domain
         public string Token { get; set; }
         public bool Success { get; set; }
         public IEnumerable<string> Errors { get; set; }
+        public string RefreshToken { get; set; }
     }
 }

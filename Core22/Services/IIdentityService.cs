@@ -1,7 +1,4 @@
 ﻿using Core22.Domain;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace Core22.Services
@@ -10,5 +7,6 @@ namespace Core22.Services
     {
         Task<AuthenticationResult> RegiterAsync(string email, string password);
         Task<AuthenticationResult> LoginAsync(string email, string password);
+        Task<AuthenticationResult> RefreshTokenAsync(string token, string refreshToken);
     }
 }
